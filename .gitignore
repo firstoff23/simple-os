@@ -1,0 +1,17 @@
+# Binarios compilados
+*.bin
+*.o
+*.elf
+*.img
+*.iso
+*.lst
+
+# QEMU
+*.qcow2
+
+# VS Code
+.vscode/
+
+# Temporarios
+*~
+*.tmp
