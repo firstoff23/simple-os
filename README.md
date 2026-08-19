@@ -20,6 +20,12 @@
   <img src="https://img.shields.io/badge/Estado-Em%20construção-F59E0B?style=for-the-badge" alt="Em construção" />
 </p>
 
+<p align="center">
+  <a href="https://github.com/firstoff23/simple-os/actions/workflows/readme-check.yml">
+    <img src="https://github.com/firstoff23/simple-os/actions/workflows/readme-check.yml/badge.svg" alt="Estado do workflow README checks" />
+  </a>
+</p>
+
 ---
 
 ## Objetivo
