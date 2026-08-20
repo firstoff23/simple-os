@@ -1,0 +1,46 @@
+name: Build and boot test
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - boot/**
+      - tests/**
+      - docs/**
+      - Makefile
+      - .github/workflows/build-and-boot-test.yml
+  pull_request:
+    paths:
+      - boot/**
+      - tests/**
+      - docs/**
+      - Makefile
+      - .github/workflows/build-and-boot-test.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  boot-sector:
+    name: Assemble and boot in QEMU
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes nasm make qemu-system-x86
+
+      - name: Assemble and test boot sector
+        run: make test
+
+      - name: Upload boot image
+        uses: actions/upload-artifact@v4
+        with:
+          name: simple-os-boot-image
+          path: build/simple-os.img
+          if-no-files-found: error
+          retention-days: 14

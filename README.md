@@ -11,6 +11,7 @@
 <p align="center">
   <a href="#-objetivo">Objetivo</a> ·
   <a href="#-percurso-de-aprendizagem">Percurso</a> ·
+  <a href="#-começar">Começar</a> ·
   <a href="#-estado-do-repositório">Estado</a>
 </p>
 
@@ -48,11 +49,38 @@ Este repositório serve também como um registo do processo: decisões técnicas
 
 ## Estado do repositório
 
-O projeto encontra-se numa fase inicial de documentação e planeamento. Ainda não existem fontes de implementação ou instruções de compilação publicadas neste repositório. Esta transparência é intencional: os passos práticos serão documentados apenas quando houver código que possa ser executado e verificado.
+O projeto inclui agora o seu primeiro marco executável: um **sector de arranque BIOS x86 de 512 bytes**. A imagem inicializa o ambiente de modo real, escreve uma mensagem de confirmação e entra num estado seguro de paragem. É um ponto de partida pequeno, mas totalmente reproduzível e testado em emulador.
 
-| Atualmente disponível | Próxima atualização esperada |
+| Atualmente disponível | Próximo marco planeado |
 | --- | --- |
-| Visão, objetivo de aprendizagem e identidade visual do projeto. | Código de arranque, ferramentas necessárias e instruções de compilação. |
+| Sector de arranque em NASM, `Makefile`, teste não gráfico em QEMU e workflow de CI. | Consola reutilizável, GDT mínima e transição documentada para modo protegido de 32 bits. |
+
+## Começar
+
+### Pré-requisitos
+
+É necessário instalar **NASM**, **Make** e **QEMU para x86**. Em Ubuntu ou Debian:
+
+```bash
+sudo apt install nasm make qemu-system-x86
+```
+
+### Compilar e testar
+
+```bash
+# Produz build/simple-os.img (512 bytes)
+make build
+
+# Verifica tamanho, assinatura BIOS e arranque não gráfico no QEMU
+make test
+
+# Abre a imagem no emulador gráfico
+make run
+```
+
+O teste não escreve em discos reais nem exige hardware físico. A imagem e os artefactos de compilação permanecem em `build/`, que está excluído do controlo de versões.
+
+A explicação detalhada do modelo de arranque encontra-se em [`docs/architecture.md`](./docs/architecture.md).
 
 ## Princípios de desenvolvimento
 
